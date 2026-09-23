@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>파문(波紋)</title>
 <script src="cache_data.js"></script>
 <style>
@@ -57,6 +58,25 @@
   .glossary-table td.term { font-weight: 700; color: #111827; white-space: nowrap; }
   .glossary-table td.meaning { color: #6b7280; white-space: nowrap; }
   .glossary-note { font-size: 11px; color: #9ca3af; margin-top: 10px; }
+  .glossary-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* 모바일 화면 (너비 640px 이하) */
+  @media (max-width: 640px) {
+    .topbar { height: auto; padding: 14px 16px; flex-wrap: wrap; row-gap: 4px; }
+    .subtitle { margin-left: 0; flex-basis: 100%; padding-left: 40px; }
+    .wrap { padding: 16px 12px; gap: 16px; }
+    .query-box { padding: 16px 16px; }
+    .query-row { flex-direction: column; align-items: stretch; gap: 10px; }
+    select, .query-row > button#queryBtn { width: 100%; }
+    .glossary-toggle { width: 100%; text-align: left; }
+    .hint { margin-left: 0; }
+    .result-title { flex-wrap: wrap; }
+    .grid { grid-template-columns: 1fr; gap: 14px; }
+    .card { padding: 16px 16px; }
+    .cases { flex-direction: column; align-items: stretch; }
+    .glossary-table th, .glossary-table td,
+    .glossary-table td.term, .glossary-table td.meaning { white-space: normal; }
+  }
 </style>
 </head>
 <body>
@@ -296,7 +316,7 @@ function renderGlossary() {
   const hasMapping = items.some((item) => item.whenHigher);
   const hasInverted = items.some((item) => item.inverted);
   const whenLabel = WHEN_HIGHER_LABEL[categorySel.value] || "예상보다 강할 때";
-  let html = `<table class="glossary-table"><thead><tr><th>용어</th><th>뜻</th><th>설명</th>`;
+  let html = `<div class="glossary-scroll"><table class="glossary-table"><thead><tr><th>용어</th><th>뜻</th><th>설명</th>`;
   if (hasMapping) html += `<th>${whenLabel}</th>`;
   html += `</tr></thead><tbody>`;
   for (const item of items) {
@@ -307,7 +327,7 @@ function renderGlossary() {
     }
     html += `</tr>`;
   }
-  html += `</tbody></table>`;
+  html += `</tbody></table></div>`;
   if (hasInverted) {
     html += `<div class="glossary-note">⚠️ 표시는 겉으로 보이는 숫자와 실제 방향이 반대이거나 헷갈리기 쉬운 지표예요. 위 "예상보다 ~할 때" 칸의 설명을 참고하세요.</div>`;
   }
