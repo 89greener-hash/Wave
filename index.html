@@ -246,14 +246,13 @@ function renderGlossary() {
   }
   const hasMapping = items.some((item) => item.file);
   let html = `<table class="glossary-table"><thead><tr><th>용어</th><th>뜻</th><th>설명</th>`;
-  if (hasMapping) html += `<th>예상보다 높을 때</th><th>연결 파일</th>`;
+  if (hasMapping) html += `<th>예상보다 높을 때</th>`;
   html += `</tr></thead><tbody>`;
   for (const item of items) {
     html += `<tr><td class="term">${item.term}</td><td class="meaning">${item.meaning}</td><td>${item.desc}</td>`;
     if (hasMapping) {
       const warn = item.inverted ? `<span class="warn-badge" title="숫자와 방향이 반대인 지표예요">⚠️</span> ` : "";
       html += `<td>${warn}${item.whenHigher || ""}</td>`;
-      html += `<td class="meaning">${item.file || ""}</td>`;
     }
     html += `</tr>`;
   }
