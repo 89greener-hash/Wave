@@ -143,10 +143,48 @@ const GLOSSARY = {
     { term: "점도표", meaning: "FOMC 위원들의 향후 금리 전망을 점으로 표시한 것", desc: "" },
   ],
   "유가": [
-    { term: "WTI", meaning: "미국 서부텍사스산 원유 가격", desc: "" },
-    { term: "브렌트유", meaning: "북해산 원유 가격", desc: "국제 유가 기준으로 많이 쓰임" },
-    { term: "두바이유", meaning: "중동산 원유", desc: "한국이 주로 수입하는 원유의 기준 가격" },
-    { term: "OPEC+ 회의", meaning: "산유국들이 생산량을 결정하는 회의", desc: "" },
+    { term: "WTI", meaning: "미국 서부텍사스산 원유 가격", desc: "미국 원유 가격의 기준. 뉴스에서 \"유가\"라고 하면 보통 이 가격을 가리키는 경우가 많음", whenHigher: "" },
+    { term: "브렌트유", meaning: "북해산 원유 가격", desc: "국제 유가의 기준으로 가장 널리 쓰임", whenHigher: "" },
+    { term: "두바이유", meaning: "중동산 원유", desc: "한국이 주로 수입하는 원유의 기준 가격", whenHigher: "" },
+    { term: "OPEC+ 회의", meaning: "산유국들이 생산량을 결정하는 회의", desc: "사우디아라비아, 러시아 등 주요 산유국이 참여하며, 감산·증산 결정이 유가에 직접 영향", whenHigher: "예상보다 감산 폭이 크면 유가 상승 압력, 증산 폭이 크면 하락 압력" },
+    { term: "EIA 재고 발표", meaning: "미국 에너지정보청의 주간 원유 재고 통계", desc: "매주 수요일 발표. 시장 영향력이 가장 큰 원유 재고 지표", whenHigher: "예상보다 재고가 크게 줄면(Draw) 수요 강세로 해석되어 유가 <b>상승</b> 압력", inverted: true },
+    { term: "API 재고 발표", meaning: "미국석유협회의 주간 원유 재고 추정치", desc: "매주 화요일, EIA보다 하루 먼저 발표되는 민간 기관 예비 수치. EIA 발표의 방향을 미리 가늠하는 용도로 많이 참고됨", whenHigher: "예상보다 재고가 크게 줄면(Draw) 유가 <b>상승</b> 압력", inverted: true },
+    { term: "재고 증가 (Build)", meaning: "원유 재고가 전주보다 늘어난 것", desc: "수요보다 공급이 많다는 신호로 해석되는 경우가 많음", whenHigher: "" },
+    { term: "재고 감소 (Draw)", meaning: "원유 재고가 전주보다 줄어든 것", desc: "수요가 공급보다 많다는 신호로 해석되는 경우가 많음", whenHigher: "" },
+    { term: "전략비축유 (SPR)", meaning: "정부가 비상시를 대비해 비축한 원유", desc: "방출하면 시중 공급이 늘어 가격에 하방 압력. 러시아-우크라이나 전쟁 이후 미국이 여러 차례 방출한 바 있음", whenHigher: "예상보다 방출 규모가 크면 유가 하락 압력" },
+  ],
+  "무역·관세": [
+    { term: "관세", meaning: "수입품에 매기는 세금", desc: "특정 국가나 품목을 정해 부과하며, 발표 시점과 실제 시행 시점이 다를 수 있음", whenHigher: "" },
+    { term: "상호관세", meaning: "상대국 관세만큼 맞춰 매기는 방식", desc: "2025년 미국이 이 방식을 여러 국가에 동시 적용하며 널리 알려짐", whenHigher: "예상보다 세율이 높거나 대상 품목·국가가 넓음" },
+    { term: "보복관세", meaning: "관세 인상에 맞대응하는 관세", desc: "한 나라가 관세를 올리면 상대국도 자국 수입품에 관세를 매겨 맞서는 것", whenHigher: "예상보다 세율이 높거나 대상 품목이 넓음" },
+    { term: "관세 유예", meaning: "발표는 했지만 적용을 미루는 것", desc: "협상 여지를 남기기 위한 조치로, 유예 기간이 끝나면 다시 불확실성이 커질 수 있음", whenHigher: "예상보다 유예 기간이 길거나 대상이 넓음" },
+    { term: "무역합의", meaning: "양국이 관세·교역 조건에 합의하는 것", desc: "단계별로 이뤄지기도 하며(1단계 합의 등), 기존 관세가 일부만 조정되는 경우도 많음", whenHigher: "예상보다 관세 인하 폭이 크거나 합의 범위가 넓음" },
+    { term: "관세 면제", meaning: "특정 품목·국가를 관세에서 제외", desc: "국내 대체 생산이 어려운 품목이나 우호국에 주로 적용됨", whenHigher: "예상보다 면제 품목·국가가 많음" },
+    { term: "공급망 재편", meaning: "생산 기지를 자국·우호국으로 옮기는 흐름", desc: "관세를 피하려는 목적 외에 안보·공급 안정성 확보 목적도 함께 거론됨", whenHigher: "" },
+  ],
+  "지정학 리스크": [
+    { term: "지정학적 긴장", meaning: "국가 간 군사·외교적 갈등 고조", desc: "실제 무력 충돌 전 단계를 포함하며, 뉴스에서 가장 자주 쓰이는 포괄적 표현", whenHigher: "예상보다 충돌 수위가 높거나 확산 범위가 넓음" },
+    { term: "제재", meaning: "특정국과의 거래·금융 접근 차단", desc: "무역 제한, 자산 동결, 국제 결제망(SWIFT) 차단 등 여러 형태가 있음", whenHigher: "예상보다 제재 대상·범위가 넓거나 강도가 높음" },
+    { term: "안전자산 선호", meaning: "위기 시 금·달러·미 국채로 자금 쏠림", desc: "영어로는 'flight to safety'. 위험자산에서 자금이 빠져나가는 것과 동전의 양면", whenHigher: "" },
+    { term: "리스크 프리미엄", meaning: "불확실성으로 자산 가격에 붙는 할인·할증", desc: "같은 자산이라도 분쟁 지역과 가까우면 리스크 프리미엄이 더 크게 붙음", whenHigher: "" },
+    { term: "휴전/종전", meaning: "분쟁이 멈추거나 끝나는 것", desc: "휴전은 잠정 중단, 종전은 공식적 분쟁 종료로 시장이 받아들이는 신뢰도가 다름", whenHigher: "예상보다 합의 범위가 넓거나 지속 가능성이 높음" },
+    { term: "대리전/프록시 갈등", meaning: "강대국이 다른 나라를 통해 간접 대립하는 것", desc: "직접 충돌보다 파급 범위를 가늠하기 어려워 시장이 불확실성을 더 크게 느끼는 경우가 많음", whenHigher: "" },
+  ],
+  "금융 불안": [
+    { term: "뱅크런", meaning: "예금자들이 한꺼번에 예금을 인출하려는 사태", desc: "은행은 예금 대부분을 대출·투자로 운용하기 때문에, 동시 인출 요구를 감당하지 못하면 파산으로 이어짐", whenHigher: "예상보다 인출 규모가 크거나 여러 기관으로 번짐" },
+    { term: "신용경색", meaning: "금융기관이 대출을 크게 줄이는 상황", desc: "은행이 위험을 꺼리게 되면서 건전한 기업도 자금 조달에 어려움을 겪는 경우가 생김", whenHigher: "예상보다 대출 축소 폭이 크거나 광범위함" },
+    { term: "시스템 리스크", meaning: "한 기관 문제가 시스템 전체로 번질 위험", desc: "개별 기관 부실인지, 여러 기관이 서로 얽혀 전체가 흔들릴 위험인지를 구분하는 핵심 개념", whenHigher: "" },
+    { term: "신용스프레드", meaning: "회사채·국채 금리 차이", desc: "스프레드가 커질수록 시장이 그 회사채의 부도 위험을 더 크게 본다는 뜻", whenHigher: "" },
+    { term: "구제금융", meaning: "정부·중앙은행의 부실 기관 자금 지원", desc: "공적 자금 투입, 대출 보증, 자산 인수 등 다양한 방식이 있음", whenHigher: "예상보다 지원 규모가 크거나 대상이 넓음" },
+    { term: "스트레스 테스트", meaning: "위기 상황 가정 하의 은행 건전성 점검", desc: "정기적으로 시행되며, 결과 발표 시 시장이 은행별 취약도를 다시 평가하는 계기가 됨", whenHigher: "예상보다 통과율이 낮거나 취약 기관이 많이 드러남" },
+    { term: "대마불사", meaning: "너무 커서 망하면 시스템이 흔들리는 기관", desc: "2008년 금융위기 이후 이런 기관에 대한 규제 강화 논의가 활발해짐", whenHigher: "" },
+  ],
+  "통화정책": [
+    { term: "양적완화(QE)", meaning: "중앙은행이 국채 등을 사들여 돈을 푸는 것", desc: "기준금리가 이미 매우 낮아 추가로 내리기 어려울 때 쓰는 비전통적 수단", whenHigher: "예상보다 매입 규모가 크거나 기간이 김" },
+    { term: "양적긴축(QT)", meaning: "중앙은행이 보유 채권을 줄여 돈을 거둠", desc: "채권을 직접 팔거나, 만기가 돌아온 채권을 재투자하지 않는 방식으로 진행됨", whenHigher: "예상보다 축소 규모가 크거나 속도가 빠름" },
+    { term: "테이퍼링", meaning: "양적완화 규모를 점점 줄이는 것", desc: "갑자기 멈추지 않고 단계적으로 줄여 시장 충격을 완화하려는 목적", whenHigher: "예상보다 축소 속도가 빠름" },
+    { term: "중앙은행 대차대조표", meaning: "중앙은행이 보유한 자산 규모", desc: "QE는 이 규모를 늘리고, QT는 줄이는 과정으로 이해하면 됨", whenHigher: "" },
+    { term: "포워드 가이던스", meaning: "중앙은행이 향후 정책 방향을 미리 알리는 것", desc: "시장이 미리 대비하게 해 급격한 충격을 줄이려는 커뮤니케이션 수단", whenHigher: "" },
   ],
 };
 
@@ -162,6 +200,17 @@ const glossaryBox = document.getElementById("glossaryBox");
 function directionKey(str) {
   return str.replace(/[\s·]/g, "");
 }
+
+// 용어표의 "예상보다 ~할 때" 열 제목: 수치로 발표되는 카테고리는 "높을 때", 사건성 카테고리는 "강할 때"
+const WHEN_HIGHER_LABEL = {
+  "물가": "예상보다 높을 때",
+  "고용": "예상보다 높을 때",
+  "경기": "예상보다 높을 때",
+  "무역·관세": "예상보다 강할 때",
+  "지정학 리스크": "예상보다 강할 때",
+  "금융 불안": "예상보다 강할 때",
+  "통화정책": "예상보다 강할 때",
+};
 
 function fillDirectionOptions() {
   const directions = CATEGORY_DIRECTIONS[categorySel.value] || [];
@@ -244,9 +293,11 @@ function renderGlossary() {
     glossaryBox.innerHTML = `<div class="empty" style="padding: 20px 0;">이 카테고리에는 등록된 용어가 없어요.</div>`;
     return;
   }
-  const hasMapping = items.some((item) => item.file);
+  const hasMapping = items.some((item) => item.whenHigher);
+  const hasInverted = items.some((item) => item.inverted);
+  const whenLabel = WHEN_HIGHER_LABEL[categorySel.value] || "예상보다 강할 때";
   let html = `<table class="glossary-table"><thead><tr><th>용어</th><th>뜻</th><th>설명</th>`;
-  if (hasMapping) html += `<th>예상보다 높을 때</th>`;
+  if (hasMapping) html += `<th>${whenLabel}</th>`;
   html += `</tr></thead><tbody>`;
   for (const item of items) {
     html += `<tr><td class="term">${item.term}</td><td class="meaning">${item.meaning}</td><td>${item.desc}</td>`;
@@ -257,8 +308,8 @@ function renderGlossary() {
     html += `</tr>`;
   }
   html += `</tbody></table>`;
-  if (hasMapping) {
-    html += `<div class="glossary-note">⚠️ 표시는 숫자와 고용 강도가 반대로 움직이는 지표예요. 숫자가 예상보다 <b>낮으면</b> 반대로 "예상상회" 파일로 연결됩니다.</div>`;
+  if (hasInverted) {
+    html += `<div class="glossary-note">⚠️ 표시는 겉으로 보이는 숫자와 실제 방향이 반대이거나 헷갈리기 쉬운 지표예요. 위 "예상보다 ~할 때" 칸의 설명을 참고하세요.</div>`;
   }
   glossaryBox.innerHTML = html;
 }
